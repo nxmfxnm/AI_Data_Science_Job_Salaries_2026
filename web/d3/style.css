@@ -369,18 +369,31 @@ footer {
 
 }
 
-
 @media (max-width: 520px) {
 
     .cards {
         grid-template-columns:
             1fr;
     }
-
-
     .hero {
         padding:
             30px 5%;
     }
 
+}
+/* ================================
+   D3 TOOLTIP
+================================ */
+.d3-tooltip {
+    position: fixed;
+    max-width: 280px;
+    word-wrap: break-word;
+    white-space: normal;
+}
+@media (max-width: 600px) {
+    .d3-tooltip {
+        max-width: 220px;
+        font-size: 12px !important;
+        padding: 8px 10px !important;
+    }
 }
