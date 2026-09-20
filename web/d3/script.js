@@ -666,96 +666,41 @@ function drawBar(data) {
         tooltip();
 
 
+g.selectAll(".bar")
+    .data(grouped)
+    .join("rect")
+    .attr("class", "bar")
+    .attr("x", d => x(d[0]))
+    .attr("y", innerHeight)
+    .attr("width", x.bandwidth())
+    .attr("height", 0)
 
-    g.selectAll(".bar")
+    // ⭐ Animation
+    .transition()
+    .duration(1000)
+    .ease(d3.easeCubicOut)
+    .attr("y", d => y(d[1]))
+    .attr("height", d => innerHeight - y(d[1]))
 
-        .data(grouped)
-
-        .join("rect")
-
-        .attr(
-            "class",
-            "bar"
-        )
-
-        .attr(
-            "x",
-            d =>
-                x(d[0])
-        )
-
-        .attr(
-            "y",
-            d =>
-                y(d[1])
-        )
-
-        .attr(
-            "width",
-            x.bandwidth()
-        )
-
-        .attr(
-            "height",
-            d =>
-                innerHeight -
-                y(d[1])
-        )
-
-        .on(
-            "mousemove",
-            (event, d) => {
-
-                t
-
-                    .style(
-                        "display",
-                        "block"
-                    )
-
-                    .style(
-                        "left",
-                        (
-                            event.clientX +
-                            12
-                        ) + "px"
-                    )
-
-                    .style(
-                        "top",
-                        (
-                            event.clientY +
-                            12
-                        ) + "px"
-                    )
-
-                    .html(`
-
-                        <b>
-                            ${d[0]}
-                        </b>
-
-                        <br>
-
-                        Average:
-                        ${fmtUSD(d[1])}
-
-                    `);
-
-            }
-        )
-
-        .on(
-            "mouseout",
-            () =>
-                t.style(
-                    "display",
-                    "none"
-                )
-        );
+    // Tooltip เดิม
+    .selection()
+    .on("mousemove", (event, d) => {
+        t
+            .style("display", "block")
+            .style("left", (event.clientX + 12) + "px")
+            .style("top", (event.clientY + 12) + "px")
+            .html(`
+                <b>${d[0]}</b>
+                <br>
+                Average:
+                ${fmtUSD(d[1])}
+            `);
+    })
+    .on("mouseout", () =>
+        t.style("display", "none")
+    );
 
 }
-
 
 
 /* =========================
@@ -947,8 +892,18 @@ function drawScatter(data) {
 
         .attr(
             "r",
+            0
+        )
+
+        .transition()
+        .duration(800)
+        .ease(d3.easeCubicOut)
+        .attr(
+            "r",
             3.2
         )
+
+.selection()
 
         .on(
             "mousemove",
@@ -1121,25 +1076,44 @@ function drawDonut(data) {
 
 
     g.selectAll("path")
+    .data(pie(grouped))
+    .join("path")
 
-        .data(
-            pie(grouped)
-        )
+    .attr("fill", d => color(d.data[0]))
 
-        .join("path")
+    // ⭐ เริ่มจากไม่มีความกว้าง
+    .each(function(d) {
+        this._current = {
+            startAngle: d.startAngle,
+            endAngle: d.startAngle
+        };
+    })
 
-        .attr(
-            "d",
-            arc
-        )
+    // ⭐ Animation
+    .transition()
+    .duration(1000)
+    .ease(d3.easeCubicOut)
 
-        .attr(
-            "fill",
-            d =>
-                color(
-                    d.data[0]
-                )
-        )
+    .attrTween("d", function(d) {
+
+        const interpolate =
+            d3.interpolate(
+                this._current,
+                d
+            );
+
+        this._current =
+            interpolate(1);
+
+        return function(t) {
+            return arc(
+                interpolate(t)
+            );
+        };
+
+    })
+
+    .selection()
 
         .on(
             "mousemove",
@@ -1478,28 +1452,32 @@ function drawLine(data) {
 
 
 
-    g.append("path")
+    const linePath =
+        g.append("path")
+            .datum(bucket)
+            .attr("fill", "none")
+            .attr("stroke", "currentColor")
+            .attr("stroke-width", 2.5)
+            .attr("d", line);
 
-        .datum(bucket)
+    const totalLength =
+        linePath.node().getTotalLength();
 
+    linePath
         .attr(
-            "fill",
-            "none"
+            "stroke-dasharray",
+            totalLength + " " + totalLength
         )
-
         .attr(
-            "stroke",
-            "currentColor"
+            "stroke-dashoffset",
+            totalLength
         )
-
+        .transition()
+        .duration(1500)
+        .ease(d3.easeCubicInOut)
         .attr(
-            "stroke-width",
-            2.5
-        )
-
-        .attr(
-            "d",
-            line
+            "stroke-dashoffset",
+            0
         );
 
 
@@ -1586,3 +1564,4 @@ function drawLine(data) {
         );
 
 }
+
