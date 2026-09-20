@@ -1,179 +1,91 @@
 <!DOCTYPE html>
 <html lang="th">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta
         name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
+        content="width=device-width, initial-scale=1.0">
     <title>
         AI & Data Science Job Salaries 2026 - Chart.js
     </title>
-
-
     <link
         rel="stylesheet"
-        href="style.css"
-    >
-
-
-    <script
-        src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"
-    ></script>
-
-
-    <script
-        src="https://cdn.jsdelivr.net/npm/papaparse@5.4.3/papaparse.min.js"
-    ></script>
-
+        href="style.css">
 </head>
-
-
 <body>
-
-
 <header class="hero">
 
     <div>
-
         <p class="eyebrow">
             DATA VISUALIZATION TECHNOLOGY
         </p>
-
-
         <h1>
             AI & Data Science Job Salaries 2026
         </h1>
-
-
         <p>
             Interactive Dashboard — Chart.js Version
         </p>
-
     </div>
-
 </header>
-
-
-
 <main class="container">
-
-
-    <!-- FILTER -->
-
     <section class="controls">
-
-
         <label>
-
             Experience Level
-
             <select id="experienceFilter">
-
-                <option value="All">
+                <option value="">
                     ทั้งหมด
                 </option>
 
             </select>
-
         </label>
 
-
-
         <label>
-
             Education
-
             <select id="educationFilter">
-
-                <option value="All">
+                <option value="">
                     ทั้งหมด
                 </option>
-
             </select>
-
         </label>
-
-
-
         <label>
-
             Company Size
+            <select id="companyFilter">
 
-            <select id="companySizeFilter">
-
-                <option value="All">
+                <option value="">
                     ทั้งหมด
                 </option>
-
             </select>
-
         </label>
-
-
-
-        <button id="resetBtn">
-
+        <button
+            id="resetBtn"
+            onclick="resetFilters()"
+        >
             Reset
-
         </button>
-
-
     </section>
-
-
-
-    <!-- CARDS -->
-
     <section class="cards">
-
-
         <div class="card">
 
             <span>
                 จำนวนข้อมูล
             </span>
 
-            <strong id="count">
+            <strong id="totalJobs">
                 -
             </strong>
 
         </div>
-
-
-
         <div class="card">
 
             <span>
                 เงินเดือนเฉลี่ย
             </span>
 
-            <strong id="avgSalary">
+            <strong id="averageSalary">
                 -
             </strong>
 
         </div>
-
-
-
-        <div class="card">
-
-            <span>
-                เงินเดือนต่ำสุด
-            </span>
-
-            <strong id="minSalary">
-                -
-            </strong>
-
-        </div>
-
-
-
         <div class="card">
 
             <span>
@@ -185,19 +97,9 @@
             </strong>
 
         </div>
-
-
     </section>
-
-
-
-    <!-- CHARTS -->
-
     <section class="grid">
-
-
         <article class="chart-card">
-
             <h2>
                 1. เงินเดือนเฉลี่ยตามตำแหน่งงาน
             </h2>
@@ -205,15 +107,9 @@
             <div class="canvas-wrap">
 
                 <canvas id="barChart"></canvas>
-
             </div>
-
         </article>
-
-
-
         <article class="chart-card">
-
             <h2>
                 2. ความสัมพันธ์ระหว่างประสบการณ์กับเงินเดือน
             </h2>
@@ -221,63 +117,34 @@
             <div class="canvas-wrap">
 
                 <canvas id="scatterChart"></canvas>
-
             </div>
-
         </article>
-
-
-
         <article class="chart-card">
-
             <h2>
                 3. เงินเดือนเฉลี่ยตามระดับการศึกษา
             </h2>
-
             <div class="canvas-wrap">
 
                 <canvas id="doughnutChart"></canvas>
-
             </div>
-
         </article>
-
-
-
         <article class="chart-card">
-
             <h2>
                 4. เงินเดือนเฉลี่ยตามช่วงประสบการณ์
             </h2>
-
             <div class="canvas-wrap">
 
                 <canvas id="lineChart"></canvas>
 
             </div>
-
         </article>
-
-
     </section>
-
-
 </main>
-
-
-
 <footer>
-
     Source:
     ai_ds_job_salaries_2026.csv
-
 </footer>
-
-
-
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 <script src="script.js"></script>
-
-
 </body>
-
 </html>
