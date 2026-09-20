@@ -3,157 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>AI & Data Science Job Salaries 2026 - D3.js</title>
-
     <link rel="stylesheet" href="style.css">
-
     <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
-
 <body>
-
 <header class="hero">
     <div>
         <p class="eyebrow">DATA VISUALIZATION TECHNOLOGY</p>
-
         <h1>AI & Data Science Job Salaries 2026</h1>
-
         <p>
             Interactive Dashboard — D3.js Version
         </p>
     </div>
 </header>
-
-
 <main class="container">
-
-    <!-- FILTER -->
     <section class="controls">
-
         <label>
-            Experience Level
-
+            ตำแหน่งงาน
             <select id="experienceFilter">
                 <option value="All">ทั้งหมด</option>
             </select>
         </label>
-
-
         <label>
-            Education
-
+            วุฒิการศึกษา
             <select id="educationFilter">
                 <option value="All">ทั้งหมด</option>
             </select>
         </label>
-
-
         <label>
-            Company Size
-
+            ขนาดบริษัท
             <select id="companySizeFilter">
                 <option value="All">ทั้งหมด</option>
             </select>
         </label>
-
-
         <button id="resetBtn">
             Reset
         </button>
-
     </section>
-
-
-    <!-- SUMMARY CARDS -->
     <section class="cards">
-
         <div class="card">
             <span>จำนวนข้อมูล</span>
             <strong id="count">-</strong>
         </div>
-
-
         <div class="card">
             <span>เงินเดือนเฉลี่ย</span>
             <strong id="avgSalary">-</strong>
         </div>
-
-
         <div class="card">
             <span>เงินเดือนต่ำสุด</span>
             <strong id="minSalary">-</strong>
         </div>
-
-
         <div class="card">
             <span>เงินเดือนสูงสุด</span>
             <strong id="maxSalary">-</strong>
         </div>
-
     </section>
-
-
-    <!-- CHARTS -->
     <section class="grid">
-
         <article class="chart-card">
-
             <h2>
                 1. เงินเดือนเฉลี่ยตามตำแหน่งงาน
             </h2>
-
             <div id="barChart"></div>
-
         </article>
-
-
         <article class="chart-card">
-
             <h2>
                 2. ความสัมพันธ์ระหว่างประสบการณ์กับเงินเดือน
             </h2>
-
             <div id="scatterChart"></div>
-
         </article>
-
-
         <article class="chart-card">
-
             <h2>
                 3. เงินเดือนเฉลี่ยตามระดับการศึกษา
             </h2>
-
             <div id="donutChart"></div>
-
         </article>
-
-
         <article class="chart-card">
-
             <h2>
                 4. เงินเดือนเฉลี่ยตามช่วงประสบการณ์
             </h2>
 
             <div id="lineChart"></div>
-
         </article>
-
     </section>
-
 </main>
-
-
 <footer>
-
     Source:
     ai_ds_job_salaries_2026.csv
-
 </footer>
-
-
 <script src="script.js"></script>
-
 </body>
 </html>
