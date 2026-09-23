@@ -1,153 +1,57 @@
-# AI & Data Science Job Salaries 2026
-## Data Visualization Technology
 
-โครงงาน:
+1. ชื่อโครงการ
 การวิเคราะห์เงินเดือนและปัจจัยที่เกี่ยวข้องกับงานด้าน AI และ Data Science ปี 2026
+Analysis of Salaries and Related Factors in AI and Data Science Jobs 2026
 
----
+2. สมาชิกกลุ่ม
+นางสาวน้ำฝน ทุนอ่อง 
+นางสาววลีรัตน์ สุภาวงค์
 
-## Dataset
+3. Dataset ที่เลือก
+ชื่อ Dataset: AI and Data Science Job Salaries 2026
+แหล่งข้อมูล: Kaggle
+ผู้จัดทำ Dataset: Udit Jain
+ลิงก์ Dataset:
+https://www.kaggle.com/datasets/uditjain13/ai-and-data-science-job-salaries-2026
+ชุดข้อมูล AI and Data Science Job Salaries 2026 จาก Kaggle เป็นข้อมูลเกี่ยวกับตำแหน่งงานด้าน AI และ Data Science ในปี 2026 ซึ่งประกอบด้วยข้อมูลเกี่ยวกับตำแหน่งงาน เงินเดือน ประสบการณ์การทำงาน การศึกษา รูปแบบการทำงาน และปัจจัยอื่น ๆ ที่เกี่ยวข้องกับการทำงาน เพื่อนำมาวิเคราะห์และนำเสนอในรูปแบบ Interactive Data Visualization
 
-ไฟล์ข้อมูล:
+4. คำถามวิจัย
+4.1 ตำแหน่งงานด้าน AI และ Data Science มีเงินเดือนแตกต่างกันอย่างไร
+4.2 ระดับประสบการณ์ในการทำงานมีความสัมพันธ์กับเงินเดือนหรือไม่
+4.3 ระดับการศึกษามีความสัมพันธ์กับเงินเดือนหรือไม่
+4.4 รูปแบบการทำงาน เช่น On-site, Hybrid และ Remote มีความแตกต่างของเงินเดือนหรือไม่
+4.5 ขนาดและลักษณะของบริษัทมีความสัมพันธ์กับเงินเดือนของบุคลากรหรือไม่
+4.6 ปัจจัยใดบ้างที่มีความสัมพันธ์กับเงินเดือนของงานด้าน AI และ Data Science
 
-ai_ds_job_salaries_2026.csv
+5. วัตถุประสงค์เบื้องต้น
+5.1 เพื่อสำรวจและวิเคราะห์ลักษณะของข้อมูลตำแหน่งงานด้าน AI และ Data Science
+5.2 เพื่อวิเคราะห์และเปรียบเทียบเงินเดือนของตำแหน่งงานในด้าน AI และ Data Science
+5.3 เพื่อศึกษาความสัมพันธ์ระหว่างปัจจัยต่าง ๆ เช่น ประสบการณ์ การศึกษา รูปแบบการทำงาน และลักษณะบริษัทกับเงินเดือน
+5.4 เพื่อค้นหา Insight ที่สำคัญจากชุดข้อมูลและนำเสนอผลการวิเคราะห์ในรูปแบบ Interactive Data Visualization
+5.5 เพื่อพัฒนาเว็บแอปพลิเคชันสำหรับนำเสนอข้อมูลด้วย D3.js และ JavaScript Framework อีก 1 ตัว
 
-จำนวนข้อมูล:
+6. แผนการแบ่งงาน
+สมาชิก	หน้าที่
+นางสาวน้ำฝน ทุนอ่อง	Data Understanding, Data Cleaning, Data Preparation, วิเคราะห์ข้อมูลเบื้องต้น และจัดทำ Data Dictionary
+นางสาววลีรัตน์ สุภาวงค์	Data Analysis, Data Visualization, พัฒนาเว็บไซต์ D3.js และ Framework ที่สอง
+ทั้งสองคน	กำหนดหัวข้อ/คำถามวิจัย, ตรวจสอบผลลัพธ์, ทดสอบเว็บไซต์, จัดทำ GitHub, README, รายงาน และนำเสนอ
 
-5,000 แถว × 27 คอลัมน์
+7. กำหนดการประชุมกลุ่ม
+ครั้ง	ช่วงเวลา	หัวข้อ
+ครั้งที่ 1	07/09/69	เลือก Dataset กำหนดหัวข้อและคำถามวิจัย
+ครั้งที่ 2	07/09/69	ตรวจสอบข้อมูลและวางแผน Data Cleaning
+ครั้งที่ 3	17/09/69	วิเคราะห์ข้อมูลและเลือกประเภท Visualization
+ครั้งที่ 4	22/09/69	ตรวจสอบการพัฒนาเว็บไซต์ D3.js และ Framework ที่สอง
+ครั้งที่ 5	23/09/69	ทดสอบเว็บไซต์และปรับปรุง Interactivity
+ครั้งที่ 6	26/09/69	ตรวจสอบรายงาน GitHub และเตรียมนำเสนอ
 
----
+8. ผลลัพธ์ที่คาดว่าจะได้รับ
+1. ได้ชุดข้อมูลที่ผ่านกระบวนการทำความสะอาดและเตรียมข้อมูลอย่างเป็นระบบ
+2. ได้ผลการวิเคราะห์เกี่ยวกับเงินเดือนและปัจจัยที่เกี่ยวข้องกับงานด้าน AI และ Data Science
+3. ได้ Interactive Data Visualization ที่ช่วยให้ผู้ใช้งานสามารถสำรวจข้อมูลได้ง่าย
+4. ได้เว็บไซต์ 2 เวอร์ชัน ได้แก่ D3.js และ JavaScript Framework ที่สอง
+5. ได้ GitHub Repository และเว็บไซต์ที่เผยแพร่สู่สาธารณะตามข้อกำหนดของรายวิชา
+6. สมาชิกในกลุ่มมีประสบการณ์ในการทำงานด้าน Data Cleaning, Data Analysis, Data Visualization และ Web Development
 
-# Website Versions
 
-โครงงานพัฒนาเว็บไซต์ 2 เวอร์ชันสำหรับข้อมูลชุดเดียวกัน
 
-## Version 1: D3.js
-
-ตำแหน่งไฟล์:
-
-web/d3/
-
-ประกอบด้วย
-
-- index.html
-- style.css
-- script.js
-
----
-
-## Version 2: Chart.js
-
-ตำแหน่งไฟล์:
-
-web/chartjs/
-
-ประกอบด้วย
-
-- index.html
-- style.css
-- script.js
-
----
-
-# Visualization
-
-แต่ละเว็บไซต์ประกอบด้วยกราฟ 4 รูปแบบ
-
-1. Bar Chart
-2. Scatter Plot
-3. Doughnut Chart
-4. Line Chart
-
----
-
-# Interactivity
-
-เว็บไซต์มี Interactive ได้แก่
-
-1. Filter
-2. Tooltip
-3. Reset Filter
-
----
-
-# Filter
-
-สามารถกรองข้อมูลตาม
-
-- Experience Level
-- Education Level
-- Company Size
-
----
-
-# Summary Information
-
-เว็บไซต์แสดงข้อมูลสรุป ได้แก่
-
-- จำนวนข้อมูล
-- เงินเดือนเฉลี่ย
-- เงินเดือนต่ำสุด
-- เงินเดือนสูงสุด
-
----
-
-# Responsive Design
-
-เว็บไซต์รองรับการแสดงผลบน
-
-- Desktop
-- Laptop
-- Tablet
-- Mobile
-
-โดยใช้ CSS Media Query
-
----
-
-# Tools
-
-## D3.js Version
-
-- HTML5
-- CSS3
-- JavaScript
-- D3.js
-
-## Chart.js Version
-
-- HTML5
-- CSS3
-- JavaScript
-- Chart.js
-- PapaParse
-
----
-
-# Data Source
-
-ai_ds_job_salaries_2026.csv
-
----
-
-# Important
-
-เว็บไซต์ควรเปิดผ่าน Web Server หรือ GitHub Pages
-
-ไม่ควรเปิด index.html โดยการดับเบิลคลิกโดยตรงด้วย file://
-
-เนื่องจาก Browser อาจไม่อนุญาตให้ JavaScript โหลด CSV จากไฟล์ภายในเครื่อง
-
----
-
-# GitHub Pages
-
-สามารถเผยแพร่เว็บไซต์ผ่าน GitHub Pages ได้
-
-D3.js:
-
-/web/d3/
-
-Chart.js:
-
-/web/chartjs/
