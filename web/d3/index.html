@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI & Data Science Job Salaries 2026 - D3.js</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
@@ -26,7 +31,7 @@
             </select>
         </label>
         <label>
-            วุฒิการศึกษา
+            ระดับการศึกษา
             <select id="educationFilter">
                 <option value="All">ทั้งหมด</option>
             </select>
@@ -86,10 +91,111 @@
             <div id="lineChart"></div>
         </article>
     </section>
+    <!-- ================================
+        MODEL ANALYSIS
+    ================================ -->
+    <section class="model-section">
+
+        <div class="section-heading">
+            <p class="eyebrow">
+                MODELING / ANALYSIS
+            </p>
+            <h2>
+                การเปรียบเทียบประสิทธิภาพของแบบจำลอง
+            </h2>
+            <p>
+                เปรียบเทียบ Multiple Linear Regression และ
+                Random Forest Regression สำหรับการวิเคราะห์เงินเดือน
+                โดยใช้ MAE, RMSE และ R²
+            </p>
+        </div>
+        <!-- MODEL CARDS -->
+        <div class="model-cards">
+            <div class="model-card">
+                <h3>
+                    Multiple Linear Regression
+                </h3>
+                <p>
+                    MAE
+                    <strong id="lr-mae">-</strong>
+                </p>
+                <p>
+                    RMSE
+                    <strong id="lr-rmse">-</strong>
+                </p>
+                <p>
+                    R²
+                    <strong id="lr-r2">-</strong>
+                </p>
+            </div>
+            <div class="model-card">
+                <h3>
+                    Random Forest Regression
+                </h3>
+                <p>
+                    MAE
+                    <strong id="rf-mae">-</strong>
+                </p>
+                <p>
+                    RMSE
+                    <strong id="rf-rmse">-</strong>
+                </p>
+                <p>
+                    R²
+                    <strong id="rf-r2">-</strong>
+                </p>
+            </div>
+        </div>
+        <!-- MODEL PERFORMANCE -->
+        <div class="chart-card model-chart-card">
+
+            <h3>
+                Model Performance Comparison
+            </h3>
+            <p class="model-description">
+                เปรียบเทียบค่าความคลาดเคลื่อน MAE และ RMSE
+                ของแบบจำลองทั้งสอง
+            </p>
+            <div id="model-chart"></div>
+        </div>
+        <!-- R2 -->
+        <div class="r2-result">
+            <h3>
+                R² Score
+            </h3>
+            <div class="r2-row">
+                <span>
+                    Multiple Linear Regression
+                </span>
+                <strong id="lr-r2-detail">
+                    -
+                </strong>
+            </div>
+            <div class="r2-row">
+                <span>
+                    Random Forest Regression
+                </span>
+                <strong id="rf-r2-detail">
+                    -
+                </strong>
+            </div>
+        </div>
+        <!-- SUMMARY -->
+        <div class="model-summary">
+            <h3>
+                สรุปผลการวิเคราะห์
+            </h3>
+            <p>
+                Multiple Linear Regression มีค่า MAE และ RMSE ต่ำกว่า
+                และมีค่า R² สูงกว่า Random Forest Regression
+                จากชุดข้อมูลและตัวแปรที่ใช้ในการทดลองครั้งนี้
+            </p>
+        </div>
+    </section>
 </main>
 <footer>
-    Source:
-    ai_ds_job_salaries_2026.csv
+    Numfon Thunaong 68541207057-3 <br>
+    Waleerat Supawong 68541207060-7
 </footer>
 <script src="script.js"></script>
 </body>
