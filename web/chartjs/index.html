@@ -8,13 +8,15 @@
     <title>
         AI & Data Science Job Salaries 2026 - Chart.js
     </title>
-    <link
-        rel="stylesheet"
-        href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <header class="hero">
-
     <div>
         <p class="eyebrow">
             DATA VISUALIZATION TECHNOLOGY
@@ -30,7 +32,7 @@
 <main class="container">
     <section class="controls">
         <label>
-            Experience Level
+            ตำแหน่งงาน
             <select id="experienceFilter">
                 <option value="">
                     ทั้งหมด
@@ -38,9 +40,8 @@
 
             </select>
         </label>
-
         <label>
-            Education
+            ระดับการศึกษา
             <select id="educationFilter">
                 <option value="">
                     ทั้งหมด
@@ -48,7 +49,7 @@
             </select>
         </label>
         <label>
-            Company Size
+            ขนาดบริษัท
             <select id="companyFilter">
 
                 <option value="">
@@ -82,6 +83,17 @@
             </span>
 
             <strong id="averageSalary">
+                -
+            </strong>
+
+        </div>
+        <div class="card">
+
+            <span>
+                เงินเดือนต่ำสุด
+            </span>
+
+            <strong id="minSalary">
                 -
             </strong>
 
@@ -139,10 +151,62 @@
             </div>
         </article>
     </section>
+    <!-- ================================
+         MODEL ANALYSIS
+        ================================ -->
+<section class="model-section">
+    <div class="section-heading">
+        <p class="eyebrow">MODELING / ANALYSIS</p>
+        <h2>การเปรียบเทียบประสิทธิภาพของแบบจำลอง</h2>
+        <p>
+            เปรียบเทียบ Multiple Linear Regression และ
+            Random Forest Regression สำหรับการวิเคราะห์เงินเดือน
+            โดยใช้ MAE, RMSE และ R²
+        </p>
+    </div>
+    <!-- MODEL CARDS -->
+    <div class="model-cards">
+        <div class="model-card">
+            <h3>Multiple Linear Regression</h3>
+            <p>MAE<strong id="lr-mae">-</strong></p>
+            <p>RMSE<strong id="lr-rmse">-</strong></p>
+            <p>R²<strong id="lr-r2">-</strong></p>
+        </div>
+        <div class="model-card">
+            <h3>Random Forest Regression</h3>
+            <p>
+                MAE
+                <strong id="rf-mae">-</strong>
+            </p>
+            <p>
+                RMSE
+                <strong id="rf-rmse">-</strong>
+            </p>
+            <p>
+                R²
+                <strong id="rf-r2">-</strong>
+            </p>
+        </div>
+    </div>
+    <!-- MODEL CHART -->
+    <div class="chart-card">
+        <h3>Model Performance Comparison</h3>
+        <div id="model-chart"></div>
+    </div>
+    <!-- RESULT -->
+    <div class="model-summary">
+        <h3>สรุปผลการวิเคราะห์</h3>
+        <p>
+            Multiple Linear Regression มีค่า MAE และ RMSE ต่ำกว่า
+            และมีค่า R² สูงกว่า Random Forest Regression
+            จากชุดข้อมูลและตัวแปรที่ใช้ในการทดลองครั้งนี้
+        </p>
+    </div>
+</section>
 </main>
 <footer>
-    Source:
-    ai_ds_job_salaries_2026.csv
+    Numfon Thunaong 68541207057-3 <br>
+    Waleerat Supawong 68541207060-7
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 <script src="script.js"></script>
