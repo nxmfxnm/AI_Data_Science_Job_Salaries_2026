@@ -32,9 +32,9 @@
 
 | สมาชิก | หน้าที่ |
 |---|---|
-| นางสาวน้ำฝน ทุนอ่อง | Data Understanding, Data Cleaning, Data Preparation, วิเคราะห์ข้อมูลเบื้องต้น และจัดทำ Data Dictionary |
-| นางสาววลีรัตน์ สุภาวงค์ | Data Analysis, Data Visualization, พัฒนาเว็บไซต์ D3.js และ Framework ที่สอง |
-| ทั้งสองคน | กำหนดหัวข้อ/คำถามวิจัย, ตรวจสอบผลลัพธ์, ทดสอบเว็บไซต์, จัดทำ GitHub, README, รายงาน และนำเสนอ |
+| นางสาวน้ำฝน ทุนอ่อง | Data Understanding, Data Cleaning, Data Preparation, วิเคราะห์ข้อมูลเบื้องต้น และจัดทำ Data Dictionary, Data Analysis, Data Visualization, พัฒนาเว็บไซต์ D3.js และ Framework ทั้งสอง |
+| นางสาววลีรัตน์ สุภาวงค์ |กำหนดหัวข้อ/คำถามวิจัย, ตรวจสอบผลลัพธ์, ทดสอบเว็บไซต์, จัดทำ GitHub, README, รายงาน และนำเสนอ |
+
 
 ## กำหนดการประชุมกลุ่ม
 
