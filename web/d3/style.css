@@ -1,26 +1,18 @@
 * {
     box-sizing: border-box;
 }
-
-
 body {
     margin: 0;
 
-    font-family:
-        "Sarabun",
-        Arial,
-        sans-serif;
+    font-family:"Anuphan",sans-serif;
 
     background: #f5f7fb;
 
     color: #263238;
 }
-
-
 /* =========================
    HEADER
 ========================= */
-
 .hero {
     padding: 42px 6%;
 
@@ -33,8 +25,6 @@ body {
 
     color: white;
 }
-
-
 .hero h1 {
     margin: 8px 0;
 
@@ -45,54 +35,36 @@ body {
             44px
         );
 }
-
-
 .hero p {
     margin: 0;
 }
-
-
 .eyebrow {
     letter-spacing: 1.5px;
 
     font-weight: 700;
 }
-
-
 /* =========================
    CONTAINER
 ========================= */
-
 .container {
     width: min(
         1400px,
         94%
     );
-
     margin:
         24px auto;
 }
-
-
 /* =========================
    FILTER
 ========================= */
-
 .controls {
     display: flex;
-
     gap: 14px;
-
     flex-wrap: wrap;
-
     align-items: end;
-
     background: white;
-
     padding: 18px;
-
     border-radius: 16px;
-
     box-shadow:
         0 5px 20px
         rgba(
@@ -102,75 +74,47 @@ body {
             .06
         );
 }
-
-
 label {
     display: flex;
-
     flex-direction: column;
-
     gap: 6px;
-
     font-weight: 700;
 }
-
-
 select,
 button {
     padding:
         10px 14px;
-
     border:
         1px solid
         #d7dce5;
-
     border-radius: 10px;
-
     background: white;
-
     font-size: 15px;
 }
-
-
 button {
     cursor: pointer;
-
     background: #7db9d6;
-
     color: white;
-
     border: 0;
-
     font-weight: 700;
 }
-
-
 /* =========================
    CARDS
 ========================= */
-
 .cards {
     display: grid;
-
     grid-template-columns:
         repeat(
             4,
             1fr
         );
-
     gap: 16px;
-
     margin: 20px 0;
 }
-
-
 .card {
     background: white;
-
     padding: 20px;
-
     border-radius: 16px;
-
     box-shadow:
         0 5px 20px
         rgba(
@@ -180,31 +124,20 @@ button {
             .06
         );
 }
-
-
 .card span {
     display: block;
-
     color: #697586;
 }
-
-
 .card strong {
     display: block;
-
     margin-top: 8px;
-
     font-size: 25px;
 }
-
-
 /* =========================
    CHART GRID
 ========================= */
-
 .grid {
     display: grid;
-
     grid-template-columns:
         repeat(
             2,
@@ -213,18 +146,12 @@ button {
                 1fr
             )
         );
-
     gap: 20px;
 }
-
-
 .chart-card {
     background: white;
-
     padding: 20px;
-
     border-radius: 16px;
-
     box-shadow:
         0 5px 20px
         rgba(
@@ -233,75 +160,50 @@ button {
             0,
             .06
         );
-
     min-width: 0;
 }
-
-
 .chart-card h2 {
     font-size: 19px;
-
     margin-top: 0;
 }
-
-
 .chart-card svg {
     width: 100%;
-
     height: auto;
-
     overflow: visible;
 }
-
-
 /* =========================
    AXIS
 ========================= */
-
 .axis text {
     font-size: 11px;
 
     fill: #5f6b7a;
 }
-
-
 .axis path,
 .axis line {
     stroke: #dfe3e8;
 }
-
-
 /* =========================
    BAR
 ========================= */
-
 .bar {
     cursor: pointer;
 }
-
-
 /* =========================
    SCATTER
 ========================= */
-
 .dot {
     opacity: .55;
 
     cursor: pointer;
 }
-
-
 /* =========================
    TOOLTIP
 ========================= */
-
 .tooltip {
     position: fixed;
-
     pointer-events: none;
-
     z-index: 10;
-
     background:
         rgba(
             32,
@@ -309,50 +211,32 @@ button {
             45,
             .95
         );
-
     color: white;
-
     padding:
         9px 11px;
-
     border-radius: 8px;
-
     font-size: 13px;
 }
-
-
 /* =========================
    EMPTY
 ========================= */
-
 .empty {
     padding: 50px;
-
     text-align: center;
-
     color: #7b8492;
 }
-
-
 /* =========================
    FOOTER
 ========================= */
-
 footer {
     text-align: center;
-
     padding: 25px;
-
     color: #687385;
 }
-
-
 /* =========================
    RESPONSIVE
 ========================= */
-
 @media (max-width: 900px) {
-
     .cards {
         grid-template-columns:
             repeat(
@@ -360,17 +244,12 @@ footer {
                 1fr
             );
     }
-
-
     .grid {
         grid-template-columns:
             1fr;
     }
-
 }
-
 @media (max-width: 520px) {
-
     .cards {
         grid-template-columns:
             1fr;
@@ -379,7 +258,6 @@ footer {
         padding:
             30px 5%;
     }
-
 }
 /* ================================
    D3 TOOLTIP
@@ -395,5 +273,166 @@ footer {
         max-width: 220px;
         font-size: 12px !important;
         padding: 8px 10px !important;
+    }
+}
+/* ================================
+   MODEL ANALYSIS
+================================ */
+.model-section {
+    margin-top: 50px;
+}
+.section-heading {
+    margin-bottom: 25px;
+}
+.section-heading h2 {
+    margin:
+        8px
+        0
+        10px;
+}
+.section-heading .eyebrow {
+    color: #263238;
+}
+/* ================================
+   MODEL CARDS
+================================ */
+.model-cards {
+    display: grid;
+    grid-template-columns:
+        repeat(
+            2,
+            minmax(
+                0,
+                1fr
+            )
+        );
+    gap: 20px;
+    margin:
+        25px
+        0;
+}
+.model-card {
+    background: white;
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow:
+        0 5px 20px
+        rgba(
+            0,
+            0,
+            0,
+            .08
+        );
+}
+.model-card h3 {
+    margin:
+        0
+        0
+        18px;
+}
+.model-card p {
+    display: flex;
+    justify-content:
+        space-between;
+    align-items: center;
+    margin:
+        12px
+        0;
+}
+.model-card strong {
+    font-size: 18px;
+}
+/* ================================
+   MODEL CHART
+================================ */
+.model-chart-card {
+    margin-top: 20px;
+}
+.model-description {
+    color: #697586;
+    margin-bottom: 20px;
+}
+#model-chart {
+    width: 100%;
+    min-height: 420px;
+}
+#model-chart svg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+.model-bar {
+
+    cursor: pointer;
+}
+/* ================================
+   R2 RESULT
+================================ */
+.r2-result {
+    margin-top: 25px;
+    padding: 24px;
+    background: white;
+    border-radius: 16px;
+    box-shadow:
+        0 5px 20px
+        rgba(
+            0,
+            0,
+            0,
+            .06
+        );
+}
+.r2-result h3 {
+    margin-top: 0;
+}
+.r2-row {
+    display: flex;
+    justify-content:
+        space-between;
+    align-items: center;
+    padding:
+        12px
+        14px;
+
+    margin-top: 10px;
+    background: #f5f7fb;
+    border-radius: 10px;
+}
+.r2-row strong {
+    font-size: 18px;
+}
+/* ================================
+   MODEL SUMMARY
+================================ */
+.model-summary {
+    margin-top: 25px;
+    padding: 24px;
+    background: white;
+    border-radius: 16px;
+    box-shadow:
+        0 5px 20px
+        rgba(
+            0,
+            0,
+            0,
+            .06
+        );
+}
+.model-summary h3 {
+    margin-top: 0;
+}
+/* ===============================
+   MODEL RESPONSIVE
+================================ */
+@media (max-width: 700px) {
+    .model-cards {
+        grid-template-columns:
+            1fr;
+    }
+    #model-chart {
+        min-height: 350px;
+    }
+    .r2-row {
+        gap: 15px;
     }
 }
