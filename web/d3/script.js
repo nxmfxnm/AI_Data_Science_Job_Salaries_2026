@@ -450,6 +450,18 @@ function drawBar(data) {
         );
     const t =
         tooltip();
+    const barColors = [
+        "#E76F51",
+        "#F4A261",
+        "#E9C46A",
+        "#2A9D8F",
+        "#457B9D",
+        "#6D597A",
+        "#B56576",
+        "#355070",
+        "#84A59D",
+        "#F28482"
+    ];
 g.selectAll(".bar")
     .data(grouped)
     .join("rect")
@@ -458,6 +470,10 @@ g.selectAll(".bar")
     .attr("y", innerHeight)
     .attr("width", x.bandwidth())
     .attr("height", 0)
+
+    .attr("fill", (d, i) =>
+        barColors[i % barColors.length]
+    )
 
     // ⭐ Animation
     .transition()
@@ -992,8 +1008,8 @@ function drawLine(data) {
         g.append("path")
             .datum(bucket)
             .attr("fill", "none")
-            .attr("stroke", "currentColor")
-            .attr("stroke-width", 2.5)
+            .attr("stroke", "#2A9D8F")
+            .attr("stroke-width", 3)
             .attr("d", line);
 
     const totalLength =
@@ -1033,6 +1049,9 @@ function drawLine(data) {
             "r",
             5
         )
+        .attr("fill", "#F4A261")
+        .attr("stroke", "#ffffff")
+        .attr("stroke-width", 2)
         .on(
             "mousemove",
             (event, d) => {
