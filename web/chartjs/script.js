@@ -47,6 +47,9 @@ function createDashboard(data) {
     const averageSalary =
         data.reduce((sum, d) => sum + d.salary_usd, 0) / totalJobs;
 
+    const minSalary =
+    Math.min(...data.map(d => d.salary_usd));
+
     const maxSalary =
         Math.max(...data.map(d => d.salary_usd));
 
@@ -56,6 +59,8 @@ function createDashboard(data) {
     document.getElementById("averageSalary").textContent =
         "$" + Math.round(averageSalary).toLocaleString();
 
+    document.getElementById("minSalary").textContent =
+        "$" + Math.round(minSalary).toLocaleString();
     document.getElementById("maxSalary").textContent =
         "$" + Math.round(maxSalary).toLocaleString();
     // 4. Filter
@@ -140,18 +145,23 @@ function updateSummary(data) {
     if (data.length === 0) {
         document.getElementById("totalJobs").textContent = "0";
         document.getElementById("averageSalary").textContent = "$0";
+        document.getElementById("minSalary").textContent = "$0";
         document.getElementById("maxSalary").textContent = "$0";
         return;
     }
     const averageSalary =
         data.reduce((sum, d) => sum + d.salary_usd, 0)
         / data.length;
+    const minSalary =
+        Math.min(...data.map(d => d.salary_usd));
     const maxSalary =
         Math.max(...data.map(d => d.salary_usd));
     document.getElementById("totalJobs").textContent =
         data.length.toLocaleString();
     document.getElementById("averageSalary").textContent =
         "$" + Math.round(averageSalary).toLocaleString();
+    document.getElementById("minSalary").textContent =
+        "$" + Math.round(minSalary).toLocaleString();
     document.getElementById("maxSalary").textContent =
         "$" + Math.round(maxSalary).toLocaleString();
 }
@@ -197,15 +207,49 @@ function createBarChart(data) {
     barChart = new Chart(ctx, {
         type: "bar",
         data: {
-            labels: result.map(d => d.job),
+
+            labels:
+                result.map(d => d.job),
+
             datasets: [{
+
                 label: "Average Salary (USD)",
 
-                data: result.map(d => d.avg)
+                data:
+                    result.map(d => d.avg),
+
+                backgroundColor: [
+                    "#7db9d6",
+                    "#9b8ae0",
+                    "#f59e8b",
+                    "#70c1b3",
+                    "#f6c85f",
+                    "#6f9ceb",
+                    "#b8a1d9",
+                    "#84c7ae",
+                    "#f3a683",
+                    "#95a5d6"
+                ],
+
+                borderColor: [
+                    "#7db9d6",
+                    "#9b8ae0",
+                    "#f59e8b",
+                    "#70c1b3",
+                    "#f6c85f",
+                    "#6f9ceb",
+                    "#b8a1d9",
+                    "#84c7ae",
+                    "#f3a683",
+                    "#95a5d6"
+                ],
+
+                borderWidth: 1
             }]
         },
         options: {
             responsive: true,
+            maintainAspectRatio: false,
             plugins: {
 
                 tooltip: {
@@ -242,16 +286,18 @@ function createScatterChart(data) {
         type: "scatter",
         data: {
             datasets: [{
-
-                label: "Experience vs Salary",
-
-                data: points
-            }]
+            label: "Experience vs Salary",
+            data: points,
+            backgroundColor: "#f49fe6",
+            borderColor: "#ffd0f7",
+            pointRadius: 4,
+            pointHoverRadius: 6
+        }]
         },
         options: {
             responsive: true,
+            maintainAspectRatio: false,
             plugins: {
-
                 tooltip: {
                     enabled: true
                 }
@@ -279,11 +325,8 @@ function createDoughnutChart(data) {
     const educationSalary = {};
     data.forEach(d => {
         if (!d.education_level) return;
-
         if (!educationSalary[d.education_level]) {
-
             educationSalary[d.education_level] = [];
-
         }
         educationSalary[d.education_level]
             .push(d.salary_usd);
@@ -378,11 +421,19 @@ function createLineChart(data) {
             datasets: [{
                 label: "Average Salary (USD)",
                 data: averages,
+                borderColor: "#9b8ae0",
+                backgroundColor: "#9b8ae0",
+                pointBackgroundColor: "#9b8ae0",
+                pointBorderColor: "#9b8ae0",
+                borderWidth: 3,
+                pointRadius: 5,
+                pointHoverRadius: 7,
                 tension: 0.3
             }]
         },
         options: {
             responsive: true,
+            maintainAspectRatio: false,
             plugins: {
                 tooltip: {
                     enabled: true
@@ -402,3 +453,178 @@ function resetFilters() {
     document.getElementById("companyFilter").value = "";
     location.reload();
 }
+/* =====================================================
+   12. MODEL ANALYSIS
+===================================================== */
+const modelResults = [
+    {
+        model: "Multiple Linear Regression",
+        mae: 36948.200332,
+        rmse: 47237.034104,
+        r2: 0.266638
+    },
+    {
+        model: "Random Forest Regression",
+        mae: 40953.093811,
+        rmse: 53071.708318,
+        r2: 0.074280
+    }
+];
+/* =====================================================
+   แสดงผล Model Cards
+===================================================== */
+function showModelResults() {
+    const lr = modelResults[0];
+    const rf = modelResults[1];
+    document.getElementById("lr-mae").textContent =
+        "$" + lr.mae.toLocaleString("en-US", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        });
+    document.getElementById("lr-rmse").textContent =
+        "$" + lr.rmse.toLocaleString("en-US", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        });
+    document.getElementById("lr-r2").textContent =
+        lr.r2.toFixed(4);
+    document.getElementById("rf-mae").textContent =
+        "$" + rf.mae.toLocaleString("en-US", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        });
+    document.getElementById("rf-rmse").textContent =
+        "$" + rf.rmse.toLocaleString("en-US", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        });
+    document.getElementById("rf-r2").textContent =
+        rf.r2.toFixed(4);
+}
+/* =====================================================
+   Model Performance Comparison
+   Chart.js
+===================================================== */
+let modelChart;
+function drawModelChart() {
+    const container =
+        document.getElementById("model-chart");
+    // สร้าง canvas สำหรับ Chart.js
+    container.innerHTML =
+        '<canvas id="modelPerformanceChart"></canvas>';
+    const ctx =
+        document.getElementById("modelPerformanceChart");
+    if (modelChart) {
+        modelChart.destroy();
+    }
+    modelChart = new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels: [
+                "Multiple Linear Regression",
+                "Random Forest Regression"
+            ],
+            datasets: [
+                {
+                    label: "MAE",
+                    data: [
+                        modelResults[0].mae,
+                        modelResults[1].mae
+                    ]
+                },
+                {
+                    label: "RMSE",
+                    data: [
+                        modelResults[0].rmse,
+                        modelResults[1].rmse
+                    ]
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            animation: {
+                duration: 1000,
+                easing: "easeOutQuart"
+            },
+            interaction: {
+                mode: "index",
+                intersect: false
+            },
+            plugins: {
+                legend: {
+                    display: true,
+                    position: "top"
+                },
+                tooltip: {
+                    enabled: true,
+                    callbacks: {
+                        label: function(context) {
+                            return context.dataset.label +
+                                ": $" +
+                                context.raw.toLocaleString(
+                                    "en-US",
+                                    {
+                                        minimumFractionDigits: 2,
+                                        maximumFractionDigits: 2
+                                    }
+                                );
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: "Model"
+                    }
+                },
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: "Error (USD)"
+                    },
+                    ticks: {
+
+                        callback: function(value) {
+
+                            return "$" +
+                                value.toLocaleString();
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
+/* =====================================================
+   R² Comparison Chart
+===================================================== */
+function createR2Chart() {
+    const container =
+        document.getElementById("model-chart");
+    const r2Box =
+        document.createElement("div");
+    r2Box.className = "r2-result";
+    r2Box.innerHTML = `
+        <h4>R² Score</h4>
+        <div class="r2-row">
+            <span>Multiple Linear Regression</span>
+            <strong>${modelResults[0].r2.toFixed(4)}</strong>
+        </div>
+        <div class="r2-row">
+            <span>Random Forest Regression</span>
+            <strong>${modelResults[1].r2.toFixed(4)}</strong>
+        </div>
+    `;
+    container.appendChild(r2Box);
+}
+/* =====================================================
+   เรียกใช้งาน Model Analysis
+===================================================== */
+showModelResults();
+drawModelChart();
+createR2Chart();
