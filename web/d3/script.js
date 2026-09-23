@@ -1,3 +1,4 @@
+
 const DATA_PATH =
     "../../data/raw/ai_ds_job_salaries_2026.csv";
 let allData = [];
@@ -1074,3 +1075,564 @@ function drawLine(data) {
                 )
         );
 }
+
+/* =====================================================
+   MODEL ANALYSIS
+===================================================== */
+
+const modelResults = [
+    {
+        model: "Multiple Linear Regression",
+        mae: 36948.200332,
+        rmse: 47237.034104,
+        r2: 0.266638
+    },
+    {
+        model: "Random Forest Regression",
+        mae: 40953.093811,
+        rmse: 53071.708318,
+        r2: 0.074280
+    }
+];
+
+
+/* =====================================================
+   MODEL CARDS
+===================================================== */
+
+function showModelResults() {
+
+    const lr = modelResults[0];
+    const rf = modelResults[1];
+
+
+    d3.select("#lr-mae")
+        .text(
+            "$" +
+            d3.format(",.2f")(lr.mae)
+        );
+
+
+    d3.select("#lr-rmse")
+        .text(
+            "$" +
+            d3.format(",.2f")(lr.rmse)
+        );
+
+
+    d3.select("#lr-r2")
+        .text(
+            d3.format(".4f")(lr.r2)
+        );
+
+
+    d3.select("#rf-mae")
+        .text(
+            "$" +
+            d3.format(",.2f")(rf.mae)
+        );
+
+
+    d3.select("#rf-rmse")
+        .text(
+            "$" +
+            d3.format(",.2f")(rf.rmse)
+        );
+
+
+    d3.select("#rf-r2")
+        .text(
+            d3.format(".4f")(rf.r2)
+        );
+
+
+    /* R² Detail */
+
+    d3.select("#lr-r2-detail")
+        .text(
+            d3.format(".4f")(lr.r2)
+        );
+
+
+    d3.select("#rf-r2-detail")
+        .text(
+            d3.format(".4f")(rf.r2)
+        );
+}
+
+
+/* =====================================================
+   MODEL PERFORMANCE CHART
+   MAE + RMSE
+===================================================== */
+
+function drawModelPerformance() {
+
+    const width = 850;
+    const height = 420;
+
+
+    const margin = {
+        top: 40,
+        right: 30,
+        bottom: 90,
+        left: 90
+    };
+
+
+    const svg =
+        d3.select("#model-chart")
+            .append("svg")
+
+            .attr(
+                "viewBox",
+                `0 0 ${width} ${height}`
+            )
+
+            .attr(
+                "preserveAspectRatio",
+                "xMidYMid meet"
+            );
+
+
+    const innerWidth =
+        width -
+        margin.left -
+        margin.right;
+
+
+    const innerHeight =
+        height -
+        margin.top -
+        margin.bottom;
+
+
+    const g =
+        svg.append("g")
+
+            .attr(
+                "transform",
+                `translate(
+                    ${margin.left},
+                    ${margin.top}
+                )`
+            );
+
+
+    /* ---------------------------------
+       แปลงข้อมูลสำหรับ Grouped Bar
+    --------------------------------- */
+
+    const metrics = [
+        "MAE",
+        "RMSE"
+    ];
+
+
+    const chartData =
+        modelResults.map(d => ({
+
+            model: d.model,
+
+            MAE: d.mae,
+
+            RMSE: d.rmse
+
+        }));
+
+
+    /* ---------------------------------
+       SCALE X MODEL
+    --------------------------------- */
+
+    const x0 =
+        d3.scaleBand()
+
+            .domain(
+                chartData.map(
+                    d => d.model
+                )
+            )
+
+            .range([
+                0,
+                innerWidth
+            ])
+
+            .padding(0.25);
+
+
+    /* ---------------------------------
+       SCALE X METRIC
+    --------------------------------- */
+
+    const x1 =
+        d3.scaleBand()
+
+            .domain(metrics)
+
+            .range([
+                0,
+                x0.bandwidth()
+            ])
+
+            .padding(0.12);
+
+
+    /* ---------------------------------
+       SCALE Y
+    --------------------------------- */
+
+    const y =
+        d3.scaleLinear()
+
+            .domain([
+                0,
+
+                d3.max(
+                    chartData,
+                    d =>
+                        d3.max(
+                            metrics,
+                            metric =>
+                                d[metric]
+                        )
+                ) * 1.15
+            ])
+
+            .nice()
+
+            .range([
+                innerHeight,
+                0
+            ]);
+
+
+    /* ---------------------------------
+       COLOR
+    --------------------------------- */
+
+    const color =
+        d3.scaleOrdinal()
+
+            .domain(metrics)
+
+            .range([
+                "#7db9d6",
+                "#9b8ae0"
+            ]);
+
+
+    /* ---------------------------------
+       Y AXIS
+    --------------------------------- */
+
+    g.append("g")
+
+        .attr(
+            "class",
+            "axis"
+        )
+
+        .call(
+
+            d3.axisLeft(y)
+
+                .ticks(6)
+
+                .tickFormat(
+                    d =>
+                        "$" +
+                        d3.format(".2s")(d)
+                )
+        );
+
+
+    /* ---------------------------------
+       X AXIS
+    --------------------------------- */
+
+    g.append("g")
+
+        .attr(
+            "class",
+            "axis"
+        )
+
+        .attr(
+            "transform",
+            `translate(
+                0,
+                ${innerHeight}
+            )`
+        )
+
+        .call(
+            d3.axisBottom(x0)
+        )
+
+        .selectAll("text")
+
+        .style(
+            "text-anchor",
+            "middle"
+        );
+
+
+    /* ---------------------------------
+       TOOLTIP
+    --------------------------------- */
+
+    const t =
+        tooltip();
+
+
+    /* ---------------------------------
+       GROUP
+    --------------------------------- */
+
+    const modelGroup =
+        g.selectAll(".model-group")
+
+            .data(chartData)
+
+            .join("g")
+
+            .attr(
+                "class",
+                "model-group"
+            )
+
+            .attr(
+                "transform",
+                d =>
+                    `translate(
+                        ${x0(d.model)},
+                        0
+                    )`
+            );
+
+
+    /* ---------------------------------
+       BAR
+    --------------------------------- */
+
+    const bars =
+        modelGroup
+
+            .selectAll(".model-bar")
+
+            .data(
+                d =>
+                    metrics.map(
+                        metric => ({
+                            model:
+                                d.model,
+
+                            metric:
+                                metric,
+
+                            value:
+                                d[metric]
+                        })
+                    )
+            )
+
+            .join("rect")
+
+            .attr(
+                "class",
+                "model-bar"
+            )
+
+            .attr(
+                "x",
+                d =>
+                    x1(d.metric)
+            )
+
+            .attr(
+                "width",
+                x1.bandwidth()
+            )
+
+            /* Animation เริ่มต้น */
+
+            .attr(
+                "y",
+                innerHeight
+            )
+
+            .attr(
+                "height",
+                0
+            )
+
+            .attr(
+                "fill",
+                d =>
+                    color(d.metric)
+            )
+
+            /* Tooltip */
+
+            .on(
+                "mousemove",
+                (event, d) => {
+
+                    t
+                        .style(
+                            "display",
+                            "block"
+                        )
+
+                        .style(
+                            "left",
+                            (
+                                event.clientX +
+                                12
+                            ) + "px"
+                        )
+
+                        .style(
+                            "top",
+                            (
+                                event.clientY +
+                                12
+                            ) + "px"
+                        )
+
+                        .html(`
+                            <b>
+                                ${d.model}
+                            </b>
+
+                            <br>
+
+                            ${d.metric}:
+
+                            $${d3.format(
+                                ",.2f"
+                            )(d.value)}
+                        `);
+                }
+            )
+
+            .on(
+                "mouseout",
+                () =>
+                    t.style(
+                        "display",
+                        "none"
+                    )
+            );
+
+
+    /* ---------------------------------
+       ANIMATION
+    --------------------------------- */
+
+    bars
+        .transition()
+
+        .duration(1000)
+
+        .ease(
+            d3.easeCubicOut
+        )
+
+        .attr(
+            "y",
+            d =>
+                y(d.value)
+        )
+
+        .attr(
+            "height",
+            d =>
+                innerHeight -
+                y(d.value)
+        );
+
+
+    /* ---------------------------------
+       LEGEND
+    --------------------------------- */
+
+    const legend =
+        svg.append("g")
+
+            .attr(
+                "class",
+                "model-legend"
+            )
+
+            .attr(
+                "transform",
+                `translate(
+                    ${width - 210},
+                    20
+                )`
+            );
+
+
+    metrics.forEach(
+        (metric, index) => {
+
+            const row =
+                legend.append("g")
+
+                    .attr(
+                        "transform",
+                        `translate(
+                            0,
+                            ${index * 24}
+                        )`
+                    );
+
+
+            row.append("rect")
+
+                .attr(
+                    "width",
+                    14
+                )
+
+                .attr(
+                    "height",
+                    14
+                )
+
+                .attr(
+                    "fill",
+                    color(metric)
+                );
+
+
+            row.append("text")
+
+                .attr(
+                    "x",
+                    22
+                )
+
+                .attr(
+                    "y",
+                    12
+                )
+
+                .text(metric);
+
+        }
+    );
+}
+showModelResults();
+drawModelPerformance();
+bars
+    .transition()
+    .duration(1000)
+    .ease(d3.easeCubicOut)
+    .attr("y", d => y(d.value))
+    .attr("height", d =>
+        innerHeight - y(d.value)
+    );
